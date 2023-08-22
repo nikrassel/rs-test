@@ -4,10 +4,12 @@ import Main from "./pages/main";
 import BrowseInfo from "./pages/browseInfo";
 import Login from "./pages/login";
 import NotFound from "./pages/notFound";
+import Navbar from "./components/Navbar/navbar";
 
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/browse" element={<BrowseInfo />} />
