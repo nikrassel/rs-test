@@ -36,12 +36,12 @@ const BrowseInfo = () => {
     <div>
       <h1>Browse Info</h1>
       {info ? (
-        <div className="row">
+        <div className="row justify-content-md-center">
           <div className="col-4">
             <h2>Родительские компоненты</h2>
             <ParentComponent info={info} method={handleChoose} />
           </div>
-          <div className="col-8">
+          <div className="col-6">
             <h2>Дочерние компоненты</h2>
             {branch && <ChildComponent info={branch} />}
           </div>
