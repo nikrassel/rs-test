@@ -6,16 +6,31 @@ import Login from "./pages/login";
 import NotFound from "./pages/notFound";
 import Navbar from "./components/Navbar/navbar";
 
+type ContextProps = {
+  userStatus: string;
+  setUserStatus: (status: string) => void;
+};
+
+export const UserContext = React.createContext<ContextProps | null>(null);
 function App() {
+  const [userStatus, setUserStatus] =
+    React.useState<ContextProps["userStatus"]>("unauthorized");
+  React.useEffect(() => {
+    if (localStorage.getItem("status") === "authorized") {
+      setUserStatus("authorized");
+    }
+  }, []);
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/browse" element={<BrowseInfo />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <UserContext.Provider value={{ userStatus, setUserStatus }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/browse" element={<BrowseInfo />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </UserContext.Provider>
     </>
   );
 }

@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../App";
+import API from "../../api";
 
 const Navbar = () => {
+  const context = React.useContext(UserContext);
+  function handleClick() {
+    API.login.logout().then((data: unknown) => {
+      if (typeof data === "string") context?.setUserStatus(data);
+    });
+  }
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light"
@@ -24,9 +32,19 @@ const Navbar = () => {
             </li>
           </ul>
           <form className="d-flex">
-            <Link to={"/login"}>
-              <button className="btn btn-outline-primary">Войти</button>
-            </Link>
+            {context?.userStatus === "authorized" ? (
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => handleClick()}
+              >
+                Выйти
+              </button>
+            ) : (
+              <Link to={"/login"}>
+                <button className="btn btn-outline-primary">Войти</button>
+              </Link>
+            )}
           </form>
         </div>
       </div>

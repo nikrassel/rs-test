@@ -1,25 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
+import { UserContext } from "../App";
 
 const Login = () => {
-  const [status, setStatus] = React.useState("");
+  const context = React.useContext(UserContext);
   const navigate = useNavigate();
   function handleClick() {
     API.login.login("admin", "admin").then((data: unknown) => {
-      if (data === "success") setStatus(data);
+      if (typeof data === "string") context?.setUserStatus(data);
     });
   }
   React.useEffect(() => {
-    if (status === "success") {
+    if (context?.userStatus === "authorized") {
       navigate("/");
     }
-  }, [status, navigate]);
-  React.useEffect(() => {
-    if (localStorage.getItem("status") === "authorized") {
-      navigate("/");
-    }
-  }, [navigate]);
+  }, [context, navigate]);
   return (
     <>
       <h1>Login page</h1>
