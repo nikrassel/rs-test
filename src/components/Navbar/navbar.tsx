@@ -6,7 +6,7 @@ import API from "../../api";
 const Navbar = () => {
   const context = React.useContext(UserContext);
   function handleClick() {
-    API.login.logout().then((data: unknown) => {
+    API.authService.logout().then((data: unknown) => {
       if (typeof data === "string") context?.setUserStatus(data);
     });
   }

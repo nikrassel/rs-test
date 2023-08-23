@@ -9,6 +9,8 @@ const login = (name: string, password: string) =>
       if (name === admin.userName && password === admin.password) {
         localStorage.setItem("status", "authorized");
         resolve("authorized");
+      } else {
+        resolve("error");
       }
     }, 1000);
   });

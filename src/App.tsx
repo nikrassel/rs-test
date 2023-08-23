@@ -5,6 +5,7 @@ import BrowseInfo from "./pages/browseInfo";
 import Login from "./pages/login";
 import NotFound from "./pages/notFound";
 import Navbar from "./components/Navbar/navbar";
+import "./index.css";
 
 type ContextProps = {
   userStatus: string;
@@ -24,12 +25,14 @@ function App() {
     <>
       <UserContext.Provider value={{ userStatus, setUserStatus }}>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/browse" element={<BrowseInfo />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="wrapper">
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/browse" element={<BrowseInfo />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </UserContext.Provider>
     </>
   );

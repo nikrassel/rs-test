@@ -40,7 +40,6 @@ const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
     if (sortBy.onSort) {
       filtredInfo = _.orderBy(filtredInfo, "name", sortBy.order);
     }
-    console.log(filtredInfo);
     return (
       <>
         <TextField
@@ -55,11 +54,12 @@ const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
           className="btn btn-primary mb-4"
           onClick={() => handleSort()}
         >
-          {sortBy.order === "asc" ? (
-            <i className="bi bi-caret-up-fill"></i>
-          ) : (
-            <i className="bi bi-caret-down-fill"></i>
-          )}
+          {sortBy.onSort &&
+            (sortBy.order === "asc" ? (
+              <i className="bi bi-caret-up-fill"></i>
+            ) : (
+              <i className="bi bi-caret-down-fill"></i>
+            ))}
           Сортировка
         </button>
         <ul>

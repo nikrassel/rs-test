@@ -2,30 +2,53 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
 import { UserContext } from "../App";
+import TextField from "../components/form/textField";
 
 const Login = () => {
   const context = React.useContext(UserContext);
   const navigate = useNavigate();
-  function handleClick() {
-    API.login.login("admin", "admin").then((data: unknown) => {
+  const [userName, setUserName] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  function handleClick(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    API.authService.login(userName, password).then((data: unknown) => {
       if (typeof data === "string") context?.setUserStatus(data);
     });
   }
   React.useEffect(() => {
     if (context?.userStatus === "authorized") {
       navigate("/");
+    } else if (context?.userStatus === "error") {
+      alert("Введен неверный логин и/или пароль");
     }
   }, [context, navigate]);
   return (
     <>
-      <h1>Login page</h1>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => handleClick()}
-      >
-        Войти
-      </button>
+      <h1>Страница авторизации</h1>
+      <div className="container mt-3">
+        <div className="row">
+          <div className="col-md-6 offset-md-3 p-4">
+            <form onSubmit={(event) => handleClick(event)}>
+              <TextField
+                label="Имя пользователя"
+                name="user-name"
+                value={userName}
+                onChange={setUserName}
+                placeHolder=""
+              />
+              <TextField
+                label="Пароль"
+                name="password"
+                type="password"
+                value={password}
+                onChange={setPassword}
+                placeHolder=""
+              />
+              <button className="btn btn-primary w-100 mx-auto">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
