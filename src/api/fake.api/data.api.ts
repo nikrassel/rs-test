@@ -1,3 +1,9 @@
+type InfoObject = {
+  key: string;
+  name: string;
+  children?: InfoObject[];
+};
+
 const data = [
   {
     key: "_",
@@ -106,6 +112,21 @@ const data = [
   },
 ];
 
+function findBranch(child: InfoObject, keyId: string): InfoObject | undefined {
+  if (child.children) {
+    for (let elem of child.children) {
+      if (elem.key === keyId) {
+        return elem;
+      } else {
+        let nextChild = findBranch(elem, keyId);
+        if (nextChild) {
+          return nextChild;
+        }
+      }
+    }
+  }
+}
+
 const fetchAll = () =>
   new Promise((resolve) => {
     window.setTimeout(function () {
@@ -113,8 +134,17 @@ const fetchAll = () =>
     }, 2000);
   });
 
+const fetchChildren = (keyId: string) =>
+  new Promise((resolve) => {
+    window.setTimeout(function () {
+      const children = findBranch(data[0], keyId);
+      resolve(children);
+    }, 1000);
+  });
+
 const dataAPI = {
   fetchAll,
+  fetchChildren,
 };
 
 export default dataAPI;

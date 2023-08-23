@@ -10,9 +10,13 @@ type InfoObject = {
 
 type ParentComponentProps = {
   info: InfoObject;
+  method: (
+    key: string,
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>
+  ) => void;
 };
 
-const ParentComponent: React.FC<ParentComponentProps> = ({ info }) => {
+const ParentComponent: React.FC<ParentComponentProps> = ({ info, method }) => {
   return (
     <ul className="tree">
       <li>
@@ -20,7 +24,7 @@ const ParentComponent: React.FC<ParentComponentProps> = ({ info }) => {
           <summary>{info.name}</summary>
           <ul>
             {info.children.map((elem: InfoObject) => (
-              <Branch key={elem.key} info={elem}></Branch>
+              <Branch key={elem.key} info={elem} method={method}></Branch>
             ))}
           </ul>
         </details>

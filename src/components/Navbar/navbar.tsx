@@ -16,37 +16,35 @@ const Navbar = () => {
       style={{ backgroundColor: "#e3f2fd" }}
     >
       <div className="container-fluid">
-        <div className="collapse navbar-collapse" id="navbarScroll">
-          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            <li className="nav-item me-2">
-              <Link to={"/"}>
-                <button className="btn btn-outline-primary">На главную</button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/browse"}>
-                <button className="btn btn-outline-primary">
-                  Основная информация
-                </button>
-              </Link>
-            </li>
-          </ul>
-          <form className="d-flex">
-            {context?.userStatus === "authorized" ? (
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={() => handleClick()}
-              >
-                Выйти
+        <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+          <li className="nav-item me-2">
+            <Link to={"/"}>
+              <button className="btn btn-outline-primary">На главную</button>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/browse"}>
+              <button className="btn btn-outline-primary">
+                Основная информация
               </button>
-            ) : (
-              <Link to={"/login"}>
-                <button className="btn btn-outline-primary">Войти</button>
-              </Link>
-            )}
-          </form>
-        </div>
+            </Link>
+          </li>
+        </ul>
+        <form className="d-flex">
+          {context?.userStatus === "authorized" ? (
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={() => handleClick()}
+            >
+              Выйти
+            </button>
+          ) : (
+            <Link to={"/login"}>
+              <button className="btn btn-outline-primary">Войти</button>
+            </Link>
+          )}
+        </form>
       </div>
     </nav>
   );
