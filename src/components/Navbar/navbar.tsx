@@ -5,7 +5,7 @@ import API from "../../api";
 
 const Navbar = () => {
   const context = React.useContext(UserContext);
-  function handleClick() {
+  function handleLogout() {
     API.authService.logout().then((data: unknown) => {
       if (typeof data === "string") context?.setUserStatus(data);
     });
@@ -35,7 +35,7 @@ const Navbar = () => {
             <button
               type="button"
               className="btn btn-outline-primary mt-1"
-              onClick={() => handleClick()}
+              onClick={() => handleLogout()}
             >
               Выйти
             </button>

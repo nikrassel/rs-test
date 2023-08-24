@@ -1,25 +1,7 @@
 import React from "react";
+import { InfoObject, InfoProps } from "../../models";
 
-type InfoObject = {
-  key: string;
-  name: string;
-  children?: InfoObject[];
-};
-
-type ParentComponentProps = {
-  info: InfoObject;
-  chosenBranch?: string;
-  method: (
-    key: string,
-    event: React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => void;
-};
-
-const Branch: React.FC<ParentComponentProps> = ({
-  info,
-  method,
-  chosenBranch,
-}) => {
+const Branch: React.FC<InfoProps> = ({ info, method, chosenBranch }) => {
   if (info.children) {
     return (
       <li onClick={(event) => method(info.key, event)}>

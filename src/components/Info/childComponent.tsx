@@ -1,12 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import TextField from "../form/textField";
-
-type InfoObject = {
-  key: string;
-  name: string;
-  children: InfoObject[];
-};
+import { InfoObject } from "../../models";
 
 type ChildComponentProps = {
   info: InfoObject;
@@ -29,7 +24,7 @@ const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
       setSortBy({ onSort: true, order: "desc" });
     }
   }
-  if (info.children.length !== 0) {
+  if (info.children && info.children?.length !== 0) {
     let filtredInfo = [...info.children];
     if (search) {
       const nameRegExp = new RegExp(`(?:${search.toLowerCase()})`, "g");

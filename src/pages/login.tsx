@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
-  function handleClick(event: React.FormEvent<HTMLFormElement>) {
+  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     API.authService.login(userName, password).then((data: unknown) => {
       if (typeof data === "string") context?.setUserStatus(data);
@@ -33,13 +33,12 @@ const Login = () => {
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6 offset-md-3 p-4">
-            <form onSubmit={(event) => handleClick(event)}>
+            <form onSubmit={(event) => handleLogin(event)}>
               <TextField
                 label="Имя пользователя"
                 name="user-name"
                 value={userName}
                 onChange={setUserName}
-                placeHolder=""
               />
               <TextField
                 label="Пароль"
@@ -47,9 +46,8 @@ const Login = () => {
                 type="password"
                 value={password}
                 onChange={setPassword}
-                placeHolder=""
               />
-              <button className="btn btn-primary w-100 mx-auto">Submit</button>
+              <button className="btn btn-primary w-100 mx-auto">Войти</button>
             </form>
           </div>
         </div>

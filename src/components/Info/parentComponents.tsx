@@ -1,23 +1,9 @@
 import React from "react";
 import "./index.css";
 import Branch from "./branch";
+import { InfoObject, InfoProps } from "../../models";
 
-type InfoObject = {
-  key: string;
-  name: string;
-  children: InfoObject[];
-};
-
-type ParentComponentProps = {
-  info: InfoObject;
-  chosenBranch?: string;
-  method: (
-    key: string,
-    event: React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => void;
-};
-
-const ParentComponent: React.FC<ParentComponentProps> = ({
+const ParentComponent: React.FC<InfoProps> = ({
   info,
   method,
   chosenBranch,
@@ -27,7 +13,7 @@ const ParentComponent: React.FC<ParentComponentProps> = ({
       <li>
         {info.name}
         <ul>
-          {info.children.map((elem: InfoObject) => (
+          {info.children?.map((elem: InfoObject) => (
             <Branch
               key={elem.key}
               info={elem}

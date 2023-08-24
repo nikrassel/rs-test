@@ -6,7 +6,7 @@ type TextFieldProps = {
   name: string;
   value: string;
   onChange: (value: string) => void;
-  placeHolder: string;
+  placeHolder?: string;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -35,7 +35,7 @@ const TextField: React.FC<TextFieldProps> = ({
           onChange={(event) => handleChange(event)}
           name={name}
           className="form-control"
-          placeholder={placeHolder}
+          placeholder={placeHolder ? placeHolder : ""}
         />
         {type === "password" && (
           <button

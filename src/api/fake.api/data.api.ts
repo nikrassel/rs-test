@@ -1,8 +1,4 @@
-type InfoObject = {
-  key: string;
-  name: string;
-  children?: InfoObject[];
-};
+import findBranch from "../../utils/findBranch";
 
 const data = [
   {
@@ -111,21 +107,6 @@ const data = [
     ],
   },
 ];
-
-function findBranch(child: InfoObject, keyId: string): InfoObject | undefined {
-  if (child.children) {
-    for (let elem of child.children) {
-      if (elem.key === keyId) {
-        return elem;
-      } else {
-        let nextChild = findBranch(elem, keyId);
-        if (nextChild) {
-          return nextChild;
-        }
-      }
-    }
-  }
-}
 
 const fetchAll = () =>
   new Promise((resolve) => {

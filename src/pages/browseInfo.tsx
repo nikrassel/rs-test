@@ -5,16 +5,8 @@ import API from "../api";
 import ParentComponent from "../components/Info/parentComponents";
 import ChildComponent from "../components/Info/childComponent";
 import LoaderComponent from "../components/common/loaderComponent";
-
-type InfoObject = {
-  key: string;
-  name: string;
-  children: InfoObject[];
-};
-
-function isInfoObject(obj: any): obj is InfoObject {
-  return typeof obj.key === "string" && typeof obj.name === "string";
-}
+import isInfoObject from "../utils/isInfoObject";
+import { InfoObject } from "../models";
 
 const BrowseInfo = () => {
   const navigate = useNavigate();
@@ -32,7 +24,7 @@ const BrowseInfo = () => {
       if (isInfoObject(data)) setInfo(data);
     });
   }, []);
-  function handleChoose(
+  function handleChoice(
     key: string,
     event: React.MouseEvent<HTMLLIElement, MouseEvent>
   ) {
@@ -53,7 +45,7 @@ const BrowseInfo = () => {
             <h2>Родительские компоненты</h2>
             <ParentComponent
               info={info}
-              method={handleChoose}
+              method={handleChoice}
               chosenBranch={branch ? branch.key : ""}
             />
           </div>
