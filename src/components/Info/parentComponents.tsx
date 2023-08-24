@@ -25,19 +25,17 @@ const ParentComponent: React.FC<ParentComponentProps> = ({
   return (
     <ul className="tree">
       <li>
-        <details open>
-          <summary>{info.name}</summary>
-          <ul>
-            {info.children.map((elem: InfoObject) => (
-              <Branch
-                key={elem.key}
-                info={elem}
-                method={method}
-                chosenBranch={chosenBranch}
-              ></Branch>
-            ))}
-          </ul>
-        </details>
+        {info.name}
+        <ul>
+          {info.children.map((elem: InfoObject) => (
+            <Branch
+              key={elem.key}
+              info={elem}
+              method={method}
+              chosenBranch={chosenBranch}
+            ></Branch>
+          ))}
+        </ul>
       </li>
     </ul>
   );

@@ -4,6 +4,7 @@ import { UserContext } from "../App";
 import API from "../api";
 import ParentComponent from "../components/Info/parentComponents";
 import ChildComponent from "../components/Info/childComponent";
+import LoaderComponent from "../components/common/loaderComponent";
 
 type InfoObject = {
   key: string;
@@ -19,6 +20,7 @@ const BrowseInfo = () => {
   const navigate = useNavigate();
   const [info, setInfo] = React.useState<InfoObject | undefined>();
   const [branch, setBranch] = React.useState<InfoObject | undefined>();
+  const [branchLoading, setBranchLoading] = React.useState(false);
   const context = React.useContext(UserContext);
   React.useEffect(() => {
     if (context?.userStatus !== "authorized") {
@@ -35,8 +37,11 @@ const BrowseInfo = () => {
     event: React.MouseEvent<HTMLLIElement, MouseEvent>
   ) {
     event.stopPropagation();
+    setBranch(undefined);
+    setBranchLoading(true);
     API.dataService.fetchChildren(key).then((data) => {
       if (isInfoObject(data)) setBranch(data);
+      setBranchLoading(false);
     });
   }
   return (
@@ -54,11 +59,12 @@ const BrowseInfo = () => {
           </div>
           <div className="col-6">
             <h2>Дочерние компоненты</h2>
+            {branchLoading && <LoaderComponent />}
             {branch && <ChildComponent info={branch} />}
           </div>
         </div>
       ) : (
-        <h2>Loading...</h2>
+        <LoaderComponent />
       )}
     </div>
   );

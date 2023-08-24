@@ -15,10 +15,6 @@
   margin-left: calc(var(--radius) - var(--spacing));
   padding-left: 0;
 }
-.tree summary {
-  display: block;
-  cursor: pointer;
-}
 
 .tree ul li {
   border-left: 2px solid #aaa8a8;
@@ -38,19 +34,6 @@
   height: calc(var(--spacing) + 1px);
   border: solid #aaa8a8;
   border-width: 0 0 2px 2px;
-}
-
-.tree summary::marker,
-.tree summary::-webkit-details-marker {
-  display: none;
-}
-
-.tree summary:focus {
-  outline: none;
-}
-
-.tree summary:focus-visible {
-  outline: 1px dotted #000;
 }
 
 .branch {
