@@ -8,21 +8,34 @@ type InfoObject = {
 
 type ParentComponentProps = {
   info: InfoObject;
+  chosenBranch?: string;
   method: (
     key: string,
     event: React.MouseEvent<HTMLLIElement, MouseEvent>
   ) => void;
 };
 
-const Branch: React.FC<ParentComponentProps> = ({ info, method }) => {
+const Branch: React.FC<ParentComponentProps> = ({
+  info,
+  method,
+  chosenBranch,
+}) => {
   if (info.children) {
     return (
       <li onClick={(event) => method(info.key, event)}>
-        {info.name}
+        <span className={info.key === chosenBranch ? "branch" : ""}>
+          {info.name}
+        </span>
+
         {info.children && (
           <ul>
             {info.children.map((elem: InfoObject) => (
-              <Branch key={elem.key} info={elem} method={method}></Branch>
+              <Branch
+                key={elem.key}
+                info={elem}
+                method={method}
+                chosenBranch={chosenBranch}
+              ></Branch>
             ))}
           </ul>
         )}

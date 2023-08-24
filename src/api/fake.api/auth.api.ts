@@ -23,8 +23,8 @@ const logout = () =>
     }, 1000);
   });
 
-const loginAPI = {
+const authAPI = {
   login,
   logout,
 };
-export default loginAPI;
+export default authAPI;

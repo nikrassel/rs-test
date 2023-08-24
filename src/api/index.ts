@@ -1,9 +1,9 @@
 import authService from "./fake.api/auth.api";
-import data from "./fake.api/data.api";
+import dataService from "./fake.api/data.api";
 
 const API = {
   authService,
-  data,
+  dataService,
 };
 
 export default API;

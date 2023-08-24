@@ -14,7 +14,7 @@ type ChildComponentProps = {
 
 const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
   const [search, setSearch] = React.useState("");
-  const [sortBy, setSortBy] = React.useState<{
+  const [sort, setSortBy] = React.useState<{
     onSort: boolean;
     order: "asc" | "desc";
   }>({ onSort: false, order: "asc" });
@@ -23,7 +23,7 @@ const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
     setSortBy({ onSort: false, order: "asc" });
   }, [info]);
   function handleSort() {
-    if (!sortBy.onSort || sortBy.order !== "asc") {
+    if (!sort.onSort || sort.order !== "asc") {
       setSortBy({ onSort: true, order: "asc" });
     } else {
       setSortBy({ onSort: true, order: "desc" });
@@ -37,8 +37,8 @@ const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
         nameRegExp.test(info.name.toLowerCase())
       );
     }
-    if (sortBy.onSort) {
-      filtredInfo = _.orderBy(filtredInfo, "name", sortBy.order);
+    if (sort.onSort) {
+      filtredInfo = _.orderBy(filtredInfo, "name", sort.order);
     }
     return (
       <>
@@ -54,8 +54,8 @@ const ChildComponent: React.FC<ChildComponentProps> = ({ info }) => {
           className="btn btn-primary mb-4"
           onClick={() => handleSort()}
         >
-          {sortBy.onSort &&
-            (sortBy.order === "asc" ? (
+          {sort.onSort &&
+            (sort.order === "asc" ? (
               <i className="bi bi-caret-up-fill"></i>
             ) : (
               <i className="bi bi-caret-down-fill"></i>

@@ -8,7 +8,7 @@
   position: relative;
   padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
   cursor: pointer;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .tree ul {
@@ -51,4 +51,8 @@
 
 .tree summary:focus-visible {
   outline: 1px dotted #000;
+}
+
+.branch {
+  font-weight: bold;
 }

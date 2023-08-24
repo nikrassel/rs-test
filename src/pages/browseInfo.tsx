@@ -26,7 +26,7 @@ const BrowseInfo = () => {
     }
   }, [context, navigate]);
   React.useEffect(() => {
-    API.data.fetchAll().then((data) => {
+    API.dataService.fetchAll().then((data) => {
       if (isInfoObject(data)) setInfo(data);
     });
   }, []);
@@ -35,7 +35,7 @@ const BrowseInfo = () => {
     event: React.MouseEvent<HTMLLIElement, MouseEvent>
   ) {
     event.stopPropagation();
-    API.data.fetchChildren(key).then((data) => {
+    API.dataService.fetchChildren(key).then((data) => {
       if (isInfoObject(data)) setBranch(data);
     });
   }
@@ -46,7 +46,11 @@ const BrowseInfo = () => {
         <div className="row justify-content-md-center">
           <div className="col-4">
             <h2>Родительские компоненты</h2>
-            <ParentComponent info={info} method={handleChoose} />
+            <ParentComponent
+              info={info}
+              method={handleChoose}
+              chosenBranch={branch ? branch.key : ""}
+            />
           </div>
           <div className="col-6">
             <h2>Дочерние компоненты</h2>
