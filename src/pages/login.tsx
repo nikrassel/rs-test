@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../api";
 import { UserContext } from "../App";
 import TextField from "../components/form/textField";
+import ToastComponent from "../components/common/toastComponent";
 
 const Login = () => {
   const context = React.useContext(UserContext);
@@ -19,13 +20,17 @@ const Login = () => {
     if (context?.userStatus === "authorized") {
       navigate("/");
     } else if (context?.userStatus === "error") {
-      alert("Введен неверный логин и/или пароль");
+      context?.setUserStatus("await");
     }
   }, [context, navigate]);
   return (
     <>
       <h1>Страница авторизации</h1>
-      <div className="container mt-3">
+      <ToastComponent
+        toastText="Введен неверный логин и/или пароль"
+        toastShow={context?.userStatus === "error" ? true : false}
+      />
+      <div className="container mt-5">
         <div className="row">
           <div className="col-md-6 offset-md-3 p-4">
             <form onSubmit={(event) => handleClick(event)}>

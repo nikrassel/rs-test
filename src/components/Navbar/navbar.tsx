@@ -17,12 +17,12 @@ const Navbar = () => {
     >
       <div className="container-fluid">
         <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-          <li className="nav-item me-2">
+          <li className="nav-item me-2 mt-1">
             <Link to={"/"}>
               <button className="btn btn-outline-primary">На главную</button>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item mt-1">
             <Link to={"/browse"}>
               <button className="btn btn-outline-primary">
                 Основная информация
@@ -34,7 +34,7 @@ const Navbar = () => {
           {context?.userStatus === "authorized" ? (
             <button
               type="button"
-              className="btn btn-outline-primary"
+              className="btn btn-outline-primary mt-1"
               onClick={() => handleClick()}
             >
               Выйти
