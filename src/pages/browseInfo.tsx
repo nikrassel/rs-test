@@ -41,8 +41,8 @@ const BrowseInfo = () => {
       <h1>Основная информация</h1>
       {info ? (
         <div className="row justify-content-md-center">
-          <div className="col-4">
-            <h2>Родительские компоненты</h2>
+          <div className="col-4" style={{ borderRight: "2px solid #aaa8a8" }}>
+            <h2>Родительские элементы</h2>
             <ParentComponent
               info={info}
               method={handleChoice}
@@ -50,7 +50,7 @@ const BrowseInfo = () => {
             />
           </div>
           <div className="col-6">
-            <h2>Дочерние компоненты</h2>
+            <h2>Дочерние элементы</h2>
             {branchLoading && <LoaderComponent />}
             {branch && <ChildComponent info={branch} />}
           </div>
